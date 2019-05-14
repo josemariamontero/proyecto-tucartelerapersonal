@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 {% block peliculas %}
-	<div>
-		<h1> Información sobre la película </h1>
+	<h1> Información sobre la película </h1>
 	{% for i in peliculas %}
 		<p><strong>Titulo:</strong> {{i["title"]}}</p>
 		 <img src="https://image.tmdb.org/t/p/w500{{i["poster_path"]}}" />
@@ -9,6 +8,5 @@
 		<p><strong>Votos:</strong> {{i["vote_average"]}}</p>
 		<p><strong>Fecha de Estreno:</strong> {{i["release_date"]}}</p>
 	{% endfor %}
-	</div>
 <a href="/">Volver al inicio</a>
 {% endblock %}
