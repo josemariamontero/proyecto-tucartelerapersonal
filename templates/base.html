@@ -30,9 +30,17 @@ Released for free under the Creative Commons Attribution License
 		<h2>¡Bienvenidos a tu cartela personal!</h2>
 		<strong>
 		{% block inicio %}{% endblock %}
+		{% block peliculas %}{% endblock %}
 		</strong>
 	</div>
 	<div id="colTwo">
+	<h3>Búsqueda de Películas</h3>
+		<form  method="post" action="/busquedapeliculas">
+			<div>
+				<input name="pelicula" type="text" />
+				<input name="submit" type="submit" value="Buscar" />
+			</div>
+		</form>
 		
 </div>
 <div id="footer">

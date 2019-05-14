@@ -3,4 +3,12 @@
 	<p>En éste sitio web podrás buscar tus películas favoritas o sagas en la cuál podrás encontrar breves descripciones sobre las distintas películas y podrás calificar cada película o serie.</p> 
 	<p>También podrás twittear para dar tu opinión sobre las películas que hayas decidido ver o series.</p>
 	<p>Incluso si te gusta la música, podrás escuchar las bandas sonoras de las respectivas películas o series que hayas visto</p>
+	<h1>Últimas Novedades</h1>
+	{% for i in novedades %}
+		<p><strong>Titulo:</strong>{{ i["title"] }}</p>
+		<img src="https://image.tmdb.org/t/p/w500{{ i["poster_path"] }}"/>
+		<p><strong>Sinopsis:</strong>{{ i["overview"] }}</p>
+		<p><strong>Votos:</strong>{{ i["vote_average"] }}</p>
+		<p><strong>Fecha de Estreno:</strong>{{ i["release_date"] }}</p>
+	{% endfor %}
 {% endblock %}
