@@ -11,7 +11,7 @@ url_base = "https://api.themoviedb.org/3"
 @app.route('/<page>')
 def inicio(page=1):
 	payload = {"api_key":key,"language":"es-ES","page":page}
-	r = requests.get(url_base+"/movie/popular",params=payload)
+	r = requests.get(url_base+"/movie/now_playing",params=payload)
 	if r.status_code == 200:
 		doc = r.json()
 		novedades = doc["results"]
