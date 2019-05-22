@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block series %}	
+	<h1> Información sobre la serie </h1>
+	{% for i in series %}
+		<p><strong>Titulo:</strong> {{i["name"]}}</p>
+		 <img src="https://image.tmdb.org/t/p/w500{{i["backdrop_path"]}}" />
+		<p><strong>Sinopsis:</strong> {{i["overview"]}}</p>
+		<p><strong>Votos:</strong> {{i["vote_average"]}}</p>
+		<p><strong>Fecha de Estreno:</strong> {{i["first_air_date"]}}</p>
+		<p><strong>País Originario:</strong>{{i["origin_country"]}}</p>
+	{% endfor %}
+<a href="/">Volver al inicio</a>
+{% endblock %}
