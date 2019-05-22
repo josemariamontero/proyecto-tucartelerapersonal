@@ -2,11 +2,31 @@
 {% block peliculas %}
 	<h1> Información sobre la película </h1>
 	{% for i in peliculas %}
+		{% if i["title"] %}
 		<p><strong>Titulo:</strong> {{i["title"]}}</p>
-		<img src="https://image.tmdb.org/t/p/w500{{i["poster_path"]}}" />
-		<p><strong>Sinopsis:</strong> {{i["overview"]}}</p>
-		<p><strong>Votos:</strong> {{i["vote_average"]}}</p>
+		{% else %}
+		<p><strong>No tiene titulo</strong></p>
+		{% endif %}
+		{% if i["poster_path"] %}
+		 <img src="https://image.tmdb.org/t/p/w500{{i["poster_path"]}}" />
+		{% else %}
+		<p><strong>No tiene poster</strong></p>
+		{% endif %}
+		{% if i["release_date"] %}
 		<p><strong>Fecha de Estreno:</strong> {{i["release_date"]}}</p>
+		{% else %}
+		<p><strong>No tiene Fecha de Estreno</strong></p>
+		{% endif %}
+		{% if i["overview"] %}
+		<p><strong>Sinopsis:</strong> {{i["overview"]}}</p>
+		{% else %}
+		<p><strong>No tiene sinopsis</strong></p>
+		{% endif %}
+		{% if i["vote_average"] %}
+		<p><strong>Votaciones:</strong> {{i["vote_average"]}}</p>
+		{% else %}
+		<p><strong>No tiene votaciones</strong></p>
+		{% endif %}
 	{% endfor %}
 <a href="/">Volver al inicio</a>
 {% endblock %}
