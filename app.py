@@ -16,17 +16,7 @@ def inicio(page=1):
 		doc = r.json()
 		novedades = doc["results"]
 	return render_template("inicio.html",novedades=novedades,page=int(page)+1)
-
-@app.route('/busquedapeliculas',methods=["GET","POST"])
-def peliculas():
-	peliculas = request.form.get('pelicula')
-	payload2 = {"api_key":key,"language":"es-ES","query":peliculas}
-	r2 = requests.get(url_base+"/search/movie",params=payload2)
-	if r2.status_code == 200:
-		doc2 = r2.json()
-		peliculas = doc2["results"]
-	return render_template("peliculas.html",peliculas=peliculas)
-
+	
 @app.route('/busquedaseries',methods=["GET","POST"])
 def series():
 	series = request.form.get('serie')
@@ -36,7 +26,29 @@ def series():
 		doc3 = r3.json()
 		series = doc3["results"]
 	return render_template("series.html",series=series)
+
+@app.route('/busquedageneros',methods=["GET","POST"])
+def generos():
+	payload4 = {"api_key":key,"language":"es-ES"}
+	r4 = requests.get(url_base+"/genre/movie/list",params=payload4)
+	if r4.status_code == 200:
+		doc4 = r4.json()
+		generos = doc4["genres"]
+	return render_template("generos.html",generos=generos)
 		
+@app.route('/busquedapeliculas',methods=["GET","POST"])
+def peliculas():
+	peliculas = request.form.get('pelicula')
+	payload2 = {"api_key":key,"language":"es-ES","query":peliculas}
+	payload5 = {"api_key":key,"language":"es-ES"}
+	r2 = requests.get(url_base+"/search/movie",params=payload2)
+	r5 = requests.get(url_base+"/genre/movie/list",params=payload5)
+	if r2.status_code == 200 and r5.status_code == 200:
+		doc2 = r2.json()
+		doc5 = r5.json()
+		peliculas = doc2["results"]
+		generos = doc5["genre"]
+	return render_template("peliculas.html",peliculas=peliculas,generos=generos)
 
 if __name__ == '__main__':
 	port=os.environ["PORT"]
