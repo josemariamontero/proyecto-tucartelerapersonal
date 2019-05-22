@@ -29,6 +29,7 @@ def series():
 
 @app.route('/busquedageneros',methods=["GET","POST"])
 def generos():
+	generos = request.form.get('generos')
 	payload4 = {"api_key":key,"language":"es-ES"}
 	r4 = requests.get(url_base+"/genre/movie/list",params=payload4)
 	if r4.status_code == 200:
@@ -40,15 +41,11 @@ def generos():
 def peliculas():
 	peliculas = request.form.get('pelicula')
 	payload2 = {"api_key":key,"language":"es-ES","query":peliculas}
-	payload5 = {"api_key":key,"language":"es-ES"}
 	r2 = requests.get(url_base+"/search/movie",params=payload2)
-	r5 = requests.get(url_base+"/genre/movie/list",params=payload5)
-	if r2.status_code == 200 and r5.status_code == 200:
+	if r2.status_code == 200:
 		doc2 = r2.json()
-		doc5 = r5.json()
 		peliculas = doc2["results"]
-		generos = doc5["genre"]
-	return render_template("peliculas.html",peliculas=peliculas,generos=generos)
+	return render_template("peliculas.html",peliculas=peliculas)
 
 if __name__ == '__main__':
 	port=os.environ["PORT"]

@@ -7,11 +7,6 @@
 		<p><strong>Sinopsis:</strong> {{i["overview"]}}</p>
 		<p><strong>Votos:</strong> {{i["vote_average"]}}</p>
 		<p><strong>Fecha de Estreno:</strong> {{i["release_date"]}}</p>
-		{% for x in generos %}
-			{% if x["id"] == i["genre_ids"] %}
-				<p><strong>Titulo:</strong> {{i["title"]}}</p>
-			{% endif%}
-		{% endfor %}
 	{% endfor %}
 <a href="/">Volver al inicio</a>
 {% endblock %}
