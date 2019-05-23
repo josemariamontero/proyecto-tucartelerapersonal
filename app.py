@@ -97,21 +97,7 @@ def vertweet():
         return render_template("twittear.html",datos=r.json())
     else:
         return redirect("/twitter")
-
-@app.route('/tweets')
-def vertweet():
-    access_token=session["access_token"]
-    access_token_secret=session["access_token_secret"]
-    oauth = OAuth1(os.environ["CONSUMER_KEY"],
-                   client_secret=os.environ["CONSUMER_SECRET"],
-                   resource_owner_key=access_token,
-                   resource_owner_secret=access_token_secret)
-    url = 'https://api.twitter.com/1.1/statuses/home_timeline.json'
-    r = requests.get(url=url,auth=oauth)
-    if r.status_code==200:
-        return render_template("twittear.html",datos=r.json())
-    else:
-        return redirect("/twitter")    
+  
 
 if __name__ == '__main__':
     port=os.environ["PORT"]
