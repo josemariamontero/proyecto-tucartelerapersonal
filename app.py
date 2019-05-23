@@ -8,7 +8,7 @@ from urllib.parse import parse_qs
 app = Flask(__name__)
 key = os.environ["key"]
 url_base = "https://api.themoviedb.org/3"
-app.secret_key= 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
+app.secret_key= 'eYEzl2yhmWQ2ChUJ8KeyZ9IvbbL7TLtp5U4YwRITB1ejg'
 
 REQUEST_TOKEN_URL = "https://api.twitter.com/oauth/request_token"
 AUTHENTICATE_URL = "https://api.twitter.com/oauth/authenticate?oauth_token="
