@@ -52,7 +52,7 @@ def get_request_token_oauth1():
                   client_secret=os.environ["CONSUMER_SECRET"])
     r = requests.post(url=REQUEST_TOKEN_URL, auth=oauth)
     credentials = parse_qs(r.content)
-return credentials.get(b'oauth_token')[0],credentials.get(b'oauth_token_secret')[0]
+    return credentials.get(b'oauth_token')[0],credentials.get(b'oauth_token_secret')[0]
 
 def get_access_token_oauth1(request_token,request_token_secret,verifier):
     oauth = OAuth1(os.environ["CONSUMER_KEY"],
@@ -64,7 +64,7 @@ def get_access_token_oauth1(request_token,request_token_secret,verifier):
       
     r = requests.post(url=ACCESS_TOKEN_URL, auth=oauth)
     credentials = parse_qs(r.content)
-return credentials.get(b'oauth_token')[0],credentials.get(b'oauth_token_secret')[0]
+    return credentials.get(b'oauth_token')[0],credentials.get(b'oauth_token_secret')[0]
 
 @app.route('/twitter')
 def twitter():
@@ -72,7 +72,7 @@ def twitter():
     authorize_url = AUTHENTICATE_URL + request_token.decode("utf-8")
     session["request_token"]=request_token.decode("utf-8")
     session["request_token_secret"]=request_token_secret.decode("utf-8")
-return render_template("oauth1.html",authorize_url=authorize_url)
+    return render_template("oauth1.html",authorize_url=authorize_url)
 
 @app.route('/twitter_callback')
 def twitter_callback():
@@ -82,7 +82,7 @@ def twitter_callback():
     access_token,access_token_secret= get_access_token_oauth1(request_token,request_token_secret,verifier)
     session["access_token"]= access_token.decode("utf-8")
     session["access_token_secret"]= access_token_secret.decode("utf-8")
-return redirect('/twittear')
+    return redirect('/twittear')
 
 @app.route('/twittear')
 def vertweet():
