@@ -1,7 +1,16 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, session
 import requests
 import json
 import os
+from requests_oauthlib import OAuth1
+from urllib.parse import parse_qs
+
+app.secret_key= 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
+
+
+REQUEST_TOKEN_URL = "https://api.twitter.com/oauth/request_token"
+AUTHENTICATE_URL = "https://api.twitter.com/oauth/authenticate?oauth_token="
+ACCESS_TOKEN_URL = "https://api.twitter.com/oauth/access_token"
 
 app = Flask(__name__)
 key = os.environ["key"]
@@ -27,15 +36,6 @@ def series():
 		series = doc3["results"]
 	return render_template("series.html",series=series)
 
-@app.route('/busquedageneros',methods=["GET","POST"])
-def generos():
-	generos = request.form.get('generos')
-	payload4 = {"api_key":key,"language":"es-ES"}
-	r4 = requests.get(url_base+"/genre/movie/list",params=payload4)
-	if r4.status_code == 200:
-		doc4 = r4.json()
-		generos = doc4["genres"]
-	return render_template("generos.html",generos=generos)
 		
 @app.route('/busquedapeliculas',methods=["GET","POST"])
 def peliculas():
@@ -46,6 +46,59 @@ def peliculas():
 		doc2 = r2.json()
 		peliculas = doc2["results"]
 	return render_template("peliculas.html",peliculas=peliculas)
+
+def get_request_token_oauth1():
+    oauth = OAuth1(os.environ["CONSUMER_KEY"],
+                  client_secret=os.environ["CONSUMER_SECRET"])
+    r = requests.post(url=REQUEST_TOKEN_URL, auth=oauth)
+    credentials = parse_qs(r.content)
+return credentials.get(b'oauth_token')[0],credentials.get(b'oauth_token_secret')[0]
+
+def get_access_token_oauth1(request_token,request_token_secret,verifier):
+    oauth = OAuth1(os.environ["CONSUMER_KEY"],
+                   client_secret=os.environ["CONSUMER_SECRET"],
+                   resource_owner_key=request_token,
+                   resource_owner_secret=request_token_secret,
+                   verifier=verifier,)
+  
+      
+    r = requests.post(url=ACCESS_TOKEN_URL, auth=oauth)
+    credentials = parse_qs(r.content)
+return credentials.get(b'oauth_token')[0],credentials.get(b'oauth_token_secret')[0]
+
+@app.route('/twitter')
+def twitter():
+    request_token,request_token_secret = get_request_token_oauth1()
+    authorize_url = AUTHENTICATE_URL + request_token.decode("utf-8")
+    session["request_token"]=request_token.decode("utf-8")
+    session["request_token_secret"]=request_token_secret.decode("utf-8")
+return render_template("oauth1.html",authorize_url=authorize_url)
+
+@app.route('/twitter_callback')
+def twitter_callback():
+    request_token=session["request_token"]
+    request_token_secret=session["request_token_secret"]
+    verifier  = request.args.get("oauth_verifier")
+    access_token,access_token_secret= get_access_token_oauth1(request_token,request_token_secret,verifier)
+    session["access_token"]= access_token.decode("utf-8")
+    session["access_token_secret"]= access_token_secret.decode("utf-8")
+return redirect('/twittear')
+
+@app.route('/twittear')
+def vertweet():
+    access_token=session["access_token"]
+    access_token_secret=session["access_token_secret"]
+    oauth = OAuth1(os.environ["CONSUMER_KEY"],
+                   client_secret=os.environ["CONSUMER_SECRET"],
+                   resource_owner_key=access_token,
+                   resource_owner_secret=access_token_secret)
+    url = 'https://api.twitter.com/1.1/statuses/update.json'
+    payload5 = {"status":"He buscado una película en https://tucartelerapersonal.herokuapp.com/"}
+    r = requests.post(url,auth=oauth,params=payload5)
+    if r.status_code==200:
+        return render_template("twittear.html",datos=r.json())
+    else:
+		return redirect("/twitter")
 
 if __name__ == '__main__':
 	port=os.environ["PORT"]
