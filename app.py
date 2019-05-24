@@ -90,15 +90,13 @@ def vertweet():
                    client_secret=os.environ["CONSUMER_SECRET"],
                    resource_owner_key=access_token,
                    resource_owner_secret=access_token_secret)
-    twitter = request.form.get('twittear')
     url = 'https://api.twitter.com/1.1/statuses/update.json'
-    payload={"status":twitter}
+    payload={"status":"Si necesitas conocer información sobre películas visita ésta página web: https://tucartelerapersonal.herokuapp.com."}
     r = requests.post(url=url,auth=oauth,params=payload)
     if r.status_code==200:
         return render_template("twittear.html",datos=r.json())
     else:
-        return redirect("/twitter")
-  
+        return redirect("/twitter")  
 
 if __name__ == '__main__':
     port=os.environ["PORT"]
