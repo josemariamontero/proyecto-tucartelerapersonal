@@ -102,7 +102,7 @@ def vertweet():
 redirect_uri = 'https://tucartelerapersonal.herokuapp.com/callback'
 scope = 'user-library-read user-read-private user-read-email playlist-read-private playlist-modify-public playlist-modify-private playlist-read-collaborative'
 token_url = "https://accounts.spotify.com/api/token"
-URL_BASE2 = "https://api.spotify.com/v1/search"
+URL_BASE2 = 'https://api.spotify.com/v1/search'
 
 def token_valido():
     try:
@@ -118,7 +118,8 @@ def token_valido():
             token_ok = False
     else:
         token_ok = False
-    return token_ok
+        return token_ok
+
 
 @app.route('/perfil_spotify')
 def info_perfil_spotify():
@@ -129,7 +130,7 @@ def info_perfil_spotify():
     authorization_url, state = oauth2.authorization_url('https://accounts.spotify.com/authorize')
     session.pop("token_sp",None)
     session["oauth_state_sp"]=state
-    return redirect(authorization_url) 
+    return redirect(authorization_url)
 
 @app.route('/callback')
 def get_token_spotify():
@@ -137,23 +138,29 @@ def get_token_spotify():
     print (request.url)
     token = oauth2.fetch_token(token_url, client_secret=os.environ["client_secret_spotify"],authorization_response=request.url[:4]+"s"+request.url[4:])
     session["token_sp"]=json.dumps(token)
-    return redirect("/perfil_usuario_spotify")
+    return redirect("/perfil_usuario_spotify") 
 
 @app.route('/perfil_usuario_spotify')
 def info_perfil_usuario_spotify():
-    if token_valido_spotify():
+    if token_valido():
         token=json.loads(session["token_sp"])
         oauth2 = OAuth2Session(os.environ["client_id_spotify"], token=token)
         r = oauth2.get('https://api.spotify.com/v1/me')
         doc=json.loads(r.content.decode("utf-8"))
-        return render_template("perfil_spotify.html", datos=doc)
+        session["id"]=doc["id"]
+        return render_template("spofity.html", datos=doc)
     else:
-        return redirect('/perfil')
+        return redirect('/perfil')  
+
+@app.route('/spotify')
+def spotify():
+    return render_template("spotify.html")
+
 
 @app.route('/logout_spotify')
 def salir_spotify():
     session.pop("token_sp",None)
-    return redirect("/spotify")
+    return render_template('inicio.html')     
 
 if __name__ == '__main__':
     port=os.environ["PORT"]
