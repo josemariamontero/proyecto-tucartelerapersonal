@@ -10,7 +10,7 @@ Released for free under the Creative Commons Attribution License
 }
 
 body {
-	background:url('../static/img/bannerinicio.jpg') center center cover no-repeat fixed;
+	background:url("bannerinicio.jpg") center center cover no-repeat fixed;
 	margin: 30px 0;
 	padding: 0;
 	background: #EFEFEF;
@@ -192,7 +192,7 @@ img {
 	width: 847px;
 	margin: 0 auto;
 	padding: 30px 35px 0 35px;
-	background: #FFFFFF url(images/img8.gif) no-repeat left bottom;
+	background: #FFFFFF url("bannerinicio.jpg") no-repeat left bottom;
 }
 
 #colOne {
