@@ -1,6 +1,6 @@
 {% extends "base.html" %}
+{% block title %}<h1> Información sobre la serie </h1>{% endblock %}
 {% block series %}	
-	<h1> Información sobre la serie </h1>
 	{% for i in series %}
 		{% if i["name"] %}
 		<p><strong>Titulo:</strong> {{i["name"]}}</p>

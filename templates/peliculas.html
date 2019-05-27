@@ -1,6 +1,6 @@
 {% extends "base.html" %}
+{% block title %}<h1> Información sobre la película </h1>{% endblock %}
 {% block peliculas %}
-	<h1> Información sobre la película </h1>
 	{% for i in peliculas %}
 		{% if i["title"] %}
 		<p><strong>Titulo:</strong> {{i["title"]}}</p>

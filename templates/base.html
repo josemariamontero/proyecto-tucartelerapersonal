@@ -8,7 +8,7 @@ Released for free under the Creative Commons Attribution License
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <title>Tu Cartela Personal</title>
-<link rel="shortcut icon" type="image/png" href="../static/img/favicon.png"/>
+<link rel="sshortcut icon" type="image/png" href="../static/img/favicon.png"/>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 </head>
@@ -26,7 +26,7 @@ Released for free under the Creative Commons Attribution License
 <div id="content">
 	<div id="colOne">
 		</br>
-		<h2>¡Bienvenidos a tu cartela personal!</h2>
+		<h2>{% block title %}{% endblock%}</h2>
 		<strong>
 		{% block inicio %}{% endblock %}
 		{% block peliculas %}{% endblock %}
@@ -52,7 +52,6 @@ Released for free under the Creative Commons Attribution License
 		</form>	
 </div>
 <div id="footer">
-	<p>Realizado por: José María Montero Romero</p>
 </div>
 </body>
 </html>
