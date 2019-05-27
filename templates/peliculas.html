@@ -6,26 +6,31 @@
 		<p><strong>Titulo:</strong> {{i["title"]}}</p>
 		{% else %}
 		<p><strong>No tiene titulo</strong></p>
+		<img src="../static/img/404error.jpg"/>
 		{% endif %}
 		{% if i["poster_path"] %}
 		 <img src="https://image.tmdb.org/t/p/w500{{i["poster_path"]}}" />
 		{% else %}
 		<p><strong>No tiene poster</strong></p>
+		<img src="../static/img/404error.jpg"/>
 		{% endif %}
 		{% if i["release_date"] %}
 		<p><strong>Fecha de Estreno:</strong> {{i["release_date"]}}</p>
 		{% else %}
 		<p><strong>No tiene Fecha de Estreno</strong></p>
+		<img src="../static/img/404error.jpg"/>
 		{% endif %}
 		{% if i["overview"] %}
 		<p><strong>Sinopsis:</strong> {{i["overview"]}}</p>
 		{% else %}
 		<p><strong>No tiene sinopsis</strong></p>
+		<img src="../static/img/404error.jpg"/>
 		{% endif %}
 		{% if i["vote_average"] %}
 		<p><strong>Votaciones:</strong> {{i["vote_average"]}}</p>
 		{% else %}
 		<p><strong>No tiene votaciones</strong></p>
+		<img src="../static/img/404error.jpg"/>
 		{% endif %}
 	{% endfor %}
 <a href="/">Volver al inicio</a>
