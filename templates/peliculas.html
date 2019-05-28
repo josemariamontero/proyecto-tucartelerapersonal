@@ -3,7 +3,7 @@
 {% block peliculas %}
 	{% for i in peliculas %}
 		{% if i["title"] %}
-		<p><strong>Titulo:</strong> {{i["title"]}}</p>
+		<p><strong><font color="red">Titulo:</font></strong> {{i["title"]}}</p>
 		{% else %}
 		<p><strong>No tiene titulo</strong></p>
 		<img src="../static/img/404error.jpg"/>
@@ -15,26 +15,28 @@
 		<img src="../static/img/404error.jpg"/>
 		{% endif %}
 		{% if i["release_date"] %}
-		<p><strong>Fecha de Estreno:</strong> {{i["release_date"]}}</p>
+		<p><strong><font color="red">Fecha de Estreno:</font></strong> {{i["release_date"]}}</p>
 		{% else %}
 		<p><strong>No tiene Fecha de Estreno</strong></p>
 		<img src="../static/img/404error.jpg"/>
 		{% endif %}
 		{% if i["overview"] %}
-		<p><strong>Sinopsis:</strong> {{i["overview"]}}</p>
+		<p><strong><font color="red">Sinopsis:</font></strong> {{i["overview"]}}</p>
 		{% else %}
 		<p><strong>No tiene sinopsis</strong></p>
 		<img src="../static/img/404error.jpg"/>
 		{% endif %}
 		{% if i["vote_average"] %}
-		<p><strong>Votaciones:</strong> {{i["vote_average"]}}</p>
+		<p><strong><font color="red">Votaciones:</font></strong> {{i["vote_average"]}}</p>
 		{% else %}
 		<p><strong>No tiene votaciones</strong></p>
 		<img src="../static/img/404error.jpg"/>
 		{% endif %}
 	{% endfor %}
-<a href="/">Volver al inicio</a>
-<div dlass="boton">
+<div class="inicio">
+	<a href="/">Volver al inicio</a>
+</div>	
+<div dlass="boton" class="boton">
   <a class="boton3" href="/twitter">Twittea algo</a>
 </div>
 {% endblock %}

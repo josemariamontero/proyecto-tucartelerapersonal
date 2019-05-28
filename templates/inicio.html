@@ -1,16 +1,16 @@
 {% extends "base.html" %}
-{% block title %} Bienvenidos a tu cartelera personal! {% endblock %}
+{% block title %}<font color="red">Bienvenidos a tu cartelera personal!</font>{% endblock %}
 {% block inicio %}
 	<p>En éste sitio web podrás buscar tus películas favoritas o sagas en la cuál podrás encontrar breves descripciones sobre las distintas películas y podrás calificar cada película o serie.</p> 
 	<p>También podrás twittear para dar tu opinión sobre las películas que hayas decidido ver o series.</p>
-	<h1>Últimas Novedades</h1>
+	<h1><font color="red">Últimas Novedades</font></h1>
 	{% for i in novedades %}
-		<p><strong>Titulo:</strong>{{ i["title"] }}</p>
+		<p><strong><font color="red">Titulo:</font></strong>{{ i["title"] }}</p>
 		<img src="https://image.tmdb.org/t/p/w500{{ i["poster_path"] }}"/>
-		<p><strong>Sinopsis:</strong>{{ i["overview"] }}</p>
-		<p><strong>Votos:</strong>{{ i["vote_average"] }}</p>
-		<p><strong>Fecha de Estreno:</strong>{{ i["release_date"] }}</p>
+		<p><strong><font color="red">Sinopsis:</font></strong>{{ i["overview"] }}</p>
+		<p><strong><font color="red">Votos:</font></strong>{{ i["vote_average"] }}</p>
+		<p><strong><font color="red">Fecha de Estreno:</font></strong>{{ i["release_date"] }}</p>
 	{% endfor %}
 		<div class="boton">
-			<a class="boton" href="/{{page}}">Siguiente página </a>
+			<a class="boton" href="/{{page}}">Siguiente página</a>
 {% endblock %}

@@ -97,71 +97,8 @@ def vertweet():
     if r.status_code==200:
         return render_template("twittear.html",datos=r.json())
     else:
-        return redirect("/twitter")  
-
-redirect_uri = 'https://tucartelerapersonal.herokuapp.com/callback'
-scope = 'user-library-read user-read-private user-read-email playlist-read-private playlist-modify-public playlist-modify-private playlist-read-collaborative'
-token_url = "https://accounts.spotify.com/api/token"
-URL_BASE2 = 'https://api.spotify.com/v1/search'
-
-def token_valido():
-    try:
-        token=json.loads(session["token_sp"])
-    except:
-        token = False
-    if token:
-        token_ok = True
-        try:
-            oauth2 = OAuth2Session(os.environ["client_id_spotify"], token=token)
-            r = oauth2.get('https://api.spotify.com/v1/me')
-        except TokenExpiredError as e:
-            token_ok = False
-    else:
-        token_ok = False
-        return token_ok
-
-
-@app.route('/perfil_spotify')
-def info_perfil_spotify():
-  if token_valido():
-    return redirect("/perfil_usuario_spotify")
-  else:
-    oauth2 = OAuth2Session(os.environ["client_id_spotify"], redirect_uri=redirect_uri,scope=scope)
-    authorization_url, state = oauth2.authorization_url('https://accounts.spotify.com/authorize')
-    session.pop("token_sp",None)
-    session["oauth_state_sp"]=state
-    return redirect(authorization_url)
-
-@app.route('/callback')
-def get_token_spotify():
-    oauth2 = OAuth2Session(os.environ["client_id_spotify"], state=session["oauth_state_sp"],redirect_uri=redirect_uri)
-    print (request.url)
-    token = oauth2.fetch_token(token_url, client_secret=os.environ["client_secret_spotify"],authorization_response=request.url[:4]+"s"+request.url[4:])
-    session["token_sp"]=json.dumps(token)
-    return redirect("/perfil_usuario_spotify") 
-
-@app.route('/perfil_usuario_spotify')
-def info_perfil_usuario_spotify():
-    if token_valido():
-        token=json.loads(session["token_sp"])
-        oauth2 = OAuth2Session(os.environ["client_id_spotify"], token=token)
-        r = oauth2.get('https://api.spotify.com/v1/me')
-        doc=json.loads(r.content.decode("utf-8"))
-        session["id"]=doc["id"]
-        return render_template("spofity.html", datos=doc)
-    else:
-        return redirect('/perfil')  
-
-@app.route('/spotify')
-def spotify():
-    return render_template("spotify.html")
-
-
-@app.route('/logout_spotify')
-def salir_spotify():
-    session.pop("token_sp",None)
-    return render_template('inicio.html')     
-
+        return redirect("/twitter") 
+     
 if __name__ == '__main__':
     port=os.environ["PORT"]
     app.run('0.0.0.0',int(port),debug=True)

@@ -6,16 +6,22 @@ Released for free under the Creative Commons Attribution License
 */
 
 * {
-	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif color:#FF0000;
+	font-color:#FF0000;
 }
 
 body {
-	background:url("bannerinicio.jpg") center center cover no-repeat fixed;
-	margin: 30px 0;
-	padding: 0;
-	background: #EFEFEF;
-	font-size: 12px;
-	color: #6B6B6B;
+
+   background:url("../../static/img/wallpaper9.jpg");
+   background-attachment: fixed;
+}
+
+
+p
+{
+    background-color: transparent;
+    color: black;
+    opacity: 1.0;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -181,7 +187,7 @@ img {
 	width: 877px;
 	height: 170px;
 	margin: 0 auto;
-	background: url(images/img5.gif) repeat-x left bottom;
+	background: url("../../static/img/wallpaper7.jpg") repeat-x left bottom;
 	border-right: 20px solid #FFFFFF;
 	border-left: 20px solid #FFFFFF;
 }
@@ -192,7 +198,7 @@ img {
 	width: 847px;
 	margin: 0 auto;
 	padding: 30px 35px 0 35px;
-	background: #FFFFFF url("bannerinicio.jpg") no-repeat left bottom;
+	
 }
 
 #colOne {
@@ -218,4 +224,21 @@ img {
 
 #footer a {
 	color: #5D5D5D;
+}
+
+.form {
+  padding-bottom: 20px;
+  padding-top: 20px;
+
+}
+ .boton{
+  padding-bottom: 20px;
+  padding-top: 20px;
+
+}
+
+.inicio{
+  padding-bottom: 20px;
+  padding-top: 20px;
+
 }

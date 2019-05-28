@@ -1,9 +1,9 @@
 {% extends "base.html" %}
-{% block title %}<h1> Información sobre la serie </h1>{% endblock %}
+{% block title %}<h1><font color="red">Información sobre la serie</font></h1>{% endblock %}
 {% block series %}	
 	{% for i in series %}
 		{% if i["name"] %}
-		<p><strong>Titulo:</strong> {{i["name"]}}</p>
+		<p><strong><font color="red">Titulo:</font></strong> {{i["name"]}}</p>
 		{% else %}
 		<p><strong>No tiene título</strong></p>
 		<img src="../static/img/404error.jpg"/>
@@ -15,25 +15,25 @@
 		<img src="../static/img/404error.jpg"/>
 		{% endif %}
 		{% if i["overview"] %}
-		<p><strong>Sinopsis:</strong> {{i["overview"]}}</p>
+		<p><strong><font color="red">Sinopsis:</font></strong> {{i["overview"]}}</p>
 		{% else %}
 		<p><strong>No tiene sinopsis</strong></p>
 		<img src="../static/img/404error.jpg"/>
 		{% endif %}
 		{% if i["vote_average"] %}
-		<p><strong>Votos:</strong> {{i["vote_average"]}}</p>
+		<p><strong><font color="red">Votos:</font></strong> {{i["vote_average"]}}</p>
 		{% else %}
 		<p><strong>No tiene votos</strong></p>
 		<img src="../static/img/404error.jpg"/>
 		{% endif %}
 		{% if i["first_air_date"] %}
-		<p><strong>Fecha de Estreno:</strong> {{i["first_air_date"]}}</p>
+		<p><strong><font color="red">Fecha de Estreno:</font></strong> {{i["first_air_date"]}}</p>
 		{% else %}
 		<p><strong>No tiene fecha de estreno</strong></p>
 		<img src="../static/img/404error.jpg"/>
 		{% endif %}
 		{% if i["origin_country"] %}
-		<p><strong>País Originario:</strong>{{i["origin_country"]}}</p>
+		<p><strong><font color="red">País Originario:</font></strong>{{i["origin_country"]}}</p>
 		{% else %}
 		<p><strong>No tiene país originario</strong></p>
 		<img src="../static/img/404error.jpg"/>
