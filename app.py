@@ -108,7 +108,7 @@ def mensajeria():
                    resource_owner_key=access_token,
                    resource_owner_secret=access_token_secret)
     url = 'https://api.twitter.com/1.1/direct_messages/events/new.json'
-    payload={"type":"message_create","message_create.target.recipient_id":"@Luciiaddiaz1","message_create.message_data":"text"}
+    payload={"type":"message_create","message_create.target.recipient_id":"@Luciiaddiaz1","message_create.message_data":"text","text":"probando"}
     if r.status_code==200:
         return render_template("mensajes.html",datos=r.json())
     else:
