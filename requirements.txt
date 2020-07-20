@@ -6,8 +6,6 @@ itsdangerous==1.1.0
 Jinja2==2.10
 MarkupSafe==1.1.1
 oauthlib==3.0.1
-post==2019.3.22
-public==2019.3.22
 requests==2.21.0
 requests-oauthlib==1.2.0
 urllib3==1.24.2
